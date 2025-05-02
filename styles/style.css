@@ -83,13 +83,13 @@ main {
 }
 
 #block1 {
-    background-color: #777;
+    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),url('../pics/index-block1-back.png') center/cover no-repeat;
     padding: 10%;
     row-gap: 20px;
 }
 
 h1 {
-    font-size: 45px;
+    font-size: 50px;
 }
 
 .search-container {
@@ -152,7 +152,7 @@ h1 {
     content: ' ';
     position: absolute;
     left: 0;
-    top: 50px;
+    top: 35px;
     width: 100%;
     height: 3px;
     background-color: black;
@@ -175,6 +175,10 @@ h2 {
     background-color: #999;
     padding: 2%;
     row-gap: 20px;
+}
+
+.block2-items {
+    font-size: 18px;
 }
 
 .block2-link {
@@ -217,6 +221,7 @@ h2 {
     justify-content: center;
     align-items: center;
     font-size: 25px;
+    color: white;
 }
 
 .table-cell:hover {
@@ -243,14 +248,15 @@ h2 {
     padding: 0 1rem;
 }
 
-#tranding {
-    padding: 2rem 0;
+@media (max-width:1440px) {
+.container {
+    max-width: 80rem;
+    padding: 0 1rem;
+}
 }
 
-@media (max-width:1440px) {
 #tranding {
-    padding: 7rem 0;
-}
+    padding: 2rem 0;
 }
 
 #tranding .tranding-slider {
@@ -259,9 +265,15 @@ h2 {
     position: relative;
 }
 
+@media (max-width:1440px) {
+#tranding .tranding-slider {
+    height: 38rem;
+}
+}
+
 @media (max-width:500px) {
 #tranding .tranding-slider {
-    height: 40rem;
+    height: 32rem;
 }
 }
 
@@ -271,7 +283,7 @@ h2 {
     position: relative;
 }
 
-@media (max-width:500px) {
+@media (max-width:1440px) {
 .tranding-slide {
     width: 28rem !important;
     height: 28rem !important;
@@ -279,6 +291,17 @@ h2 {
 .tranding-slide .tranding-slide-img img {
     width: 28rem !important;
     height: 28rem !important;
+}
+}
+
+@media (max-width:500px) {
+.tranding-slide {
+    width: 20rem !important;
+    height: 20rem !important;
+}
+.tranding-slide .tranding-slide-img img {
+    width: 20rem !important;
+    height: 20rem !important;
 }
 }
 
@@ -393,6 +416,22 @@ h2 {
     max-width: 130rem;
 }
 
+.b5-table-cell {
+    width: calc(25% - 30px);
+    aspect-ratio: 1 / 0.8;
+    border: 3px solid white;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: white;
+}
+
+.b5-table-cell:hover {
+    cursor: pointer;
+}
+
 footer {
     display: flex;
     justify-content: flex-start;
@@ -454,6 +493,7 @@ footer {
     justify-content: center;
     align-items: center;
     font-size: 30px;
+    color:white;
 }
 
 .cateLogo:hover {
