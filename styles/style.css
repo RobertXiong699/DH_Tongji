@@ -29,7 +29,7 @@ header {
     width: 100%;
     height: auto;
     background-color: black;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 a {
@@ -37,7 +37,7 @@ a {
 }
 
 #header-nav {
-    width: 80%;
+    width: 30%;
     height: auto;
 }
 
@@ -58,7 +58,7 @@ ul {
 }
 
 #langSwitch {
-    width: 20%;
+    width: 30%;
     height: auto;
     display: flex;
     justify-content: flex-end;
@@ -438,7 +438,7 @@ footer {
     width: 100%;
     height: auto;
     background-color: black;
-    font-size: 20px;
+    font-size: 18px;
     padding: 2% 7.5%;
 }
 
