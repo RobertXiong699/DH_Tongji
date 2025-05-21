@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据页</title>
+    <link href="../styles/style.css" type="text/css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: '#751021'
+              }
+            },
+          }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .s-items{
+                @apply w-[120px] aspect-square border border-2 border-black/80 rounded-xl flex justify-center items-center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav id="header-nav">
+            <ul id="header-ul">
+                <li><a href="../index.html" class="header-li">首页</a></li>
+                <li><a href="" class="header-li">专题研究</a></li>
+                <li><a href="search.html" class="header-li">搜索页</a></li>
+            </ul>
+        </nav>
+        <p class="w-3/10 text-white content-center">中国历史遗存档案</p>
+        <div id="langSwitch">
+            <p class="langSwitchText">中</p>
+            <p class="langSwitchText">|</p>
+            <p class="langSwitchText">ENG</p>
+        </div>
+    </header>
+    
+    <main class="items-start bg-black/30">
+        <div class="flex flex-col p-10 gap-4">
+            <div class="flex flex-row h-[100px] gap-4">
+                <img src="../pics/s-BLDSY.jpg" alt="图片描述" class="h-full aspect-square object-cover rounded-full">
+                <div class="h-full aspect-square border border-2 rounded-xl border-black/60 flex justify-center items-center cursor-pointer" onclick="location.href='d-pics.html'">查看全图</div>
+            </div>
+            <div class="flex flex-col gap-4">
+                <p>主题 > 儒家建筑 > 书院</p>
+                <h1 class="text-5xl">白鹿洞书院</h1>
+                <h1 class="text-5xl">White-Deer Grotto Academy</h1>
+            </div>
+        </div>
+    </main>
+
+    <main class="flex-row items-start p-10 gap-20 bg-white">
+        <div class="flex flex-col gap-6 w-3/5">
+            <p>
+            白鹿洞书院，始建于南唐升元年间（940年），位于庐山五老峰南麓，有“海内第一书院”之誉；
+            南唐立之为“庐山国学”、又称“白鹿国庠”。书院“始于唐、盛于宋，沿于明清”，鼎盛于南宋时朱熹的重建。
+            建筑群沿贯道溪自西向东串联式而筑，分为五组院落。
+            </p>
+            <h1 class="text-3xl text-primary/80">阅读全文</h1>
+            <h1 class="text-3xl text-primary/80">参考书目</h1>
+        </div>
+
+        <div class="flex flex-col gap-4 w-2/5">
+            <div class="flex flex-row gap-10">
+                <p>XXXXXX</p>
+                <p class="text-black/60">XXXXXX</p>
+            </div>
+            <div class="border border-1 border-gray/60"></div>
+
+            <div class="flex flex-row gap-10">
+                <p>XXXXXX</p>
+                <p class="text-black/60">XXXXXX</p>
+            </div>
+            <div class="border border-1 border-gray/60"></div>
+
+            <div class="flex flex-row gap-10">
+                <p>XXXXXX</p>
+                <p class="text-black/60">XXXXXX</p>
+            </div>
+            <div class="border border-1 border-gray/60"></div>
+
+            <div class="flex flex-row gap-10">
+                <p>XXXXXX</p>
+                <p class="text-black/60">XXXXXX</p>
+            </div>
+            <div class="border border-1 border-gray/60"></div>            
+        </div>
+    </main>
+    
+    <main class="p-10 bg-black/30 gap-6">
+        <div class="flex flex-row gap-6">
+            <h1 class="text-3xl">关联专题</h1>
+            <div class="flex flex-row gap-6">
+                <div class="s-items">1</div>
+                <div class="s-items">2</div>
+                <div class="s-items">3</div>
+                <div class="s-items">4</div>
+                <div class="s-items">5</div>
+            </div>
+        </div>
+        <div class="flex flex-row gap-6">
+            <h1 class="text-3xl">关联遗存</h1>
+            <div class="flex flex-row gap-6">
+                <div class="s-items">1</div>
+                <div class="s-items">2</div>
+                <div class="s-items">3</div>
+                <div class="s-items">4</div>
+                <div class="s-items">5</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <nav id="footer-nav">
+            <ul id="footer-ul-1">
+                <li><a href="" class="footer-li">关于我们</a></li>
+                <li><a href="" class="footer-li">参加人员</a></li>
+                <li><a href="" class="footer-li">政策条款</a></li>
+                <li><a href="" class="footer-li">常见问题</a></li>
+                <li><a href="" class="footer-li">联系我们</a></li>
+                <li><a href="" class="footer-li">推荐链接</a></li>
+            </ul>
+            <ul id="footer-ul-2">
+                <li><a href="" class="footer-li">About us</a></li>
+                <li><a href="" class="footer-li">Participants</a></li>
+                <li><a href="" class="footer-li">Terms & Policies</a></li>
+                <li><a href="" class="footer-li">FAQ</a></li>
+                <li><a href="" class="footer-li">Contact us</a></li>
+                <li><a href="" class="footer-li">Recommended links</a></li>
+            </ul>
+        </nav>
+        <div id="footer-links">
+            <p id="footer-p">二维码/其他链接/LOGO&nbsp;(暂未添加)</p>
+        </div>
+    </footer>
+</body>
+</html>

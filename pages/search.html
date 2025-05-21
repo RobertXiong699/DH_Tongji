@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索页</title>
+    <link href="../styles/style.css" type="text/css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: '#751021',
+                secondary: '#43A047',
+                three: '#FB8C00',
+                location: '#42A5F5',
+                label4: '#FDD835',
+                neutral: {
+                  100: '#F5F7FA',
+                  200: '#E4E7ED',
+                  300: '#C0C4CC',
+                  400: '#909399',
+                  500: '#606266',
+                  600: '#303133',
+                }
+              },
+              boxShadow: {
+                'card': '0 2px 12px 0 rgba(0, 0, 0, 0.08)',
+                'hover': '0 4px 16px 0 rgba(22, 93, 255, 0.12)',
+              }
+            },
+          }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+            content-visibility: auto;
+            }
+            .tag-transition {
+            transition: all 0.3s ease-in-out;
+            }
+            .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card-hover:hover {
+            transform: translateY(-5px);
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+            }
+            .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            }
+            .rotate-icon {
+            transition: transform 0.3s ease;
+            }
+            .search-focus {
+            transition: all 0.3s ease;
+            }
+            .page-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .input-focus {
+            @apply focus:ring-2 focus:ring-primary/50 focus:border-primary focus:outline-none;
+            }
+            .province-grid {
+            @apply grid grid-cols-9 gap-2 w-1/2 p-4;
+            }
+            .province-item {
+            @apply flex items-center justify-center h-6 rounded-lg bg-location/60 transition-all duration-300 hover:bg-location/10 hover:shadow-lg hover:scale-105 cursor-pointer;
+            }
+            .p-tag {
+            @apply flex items-center justify-between py-2 px-3 rounded-lg hover:bg-neutral-100 cursor-pointer
+            }
+            .a-input {
+            @apply w-4 h-4 rounded border-neutral-300 text-primary focus:ring-primary/30 cursor-pointer;
+            }
+            .p-label {
+            @apply ml-2 text-neutral-600 cursor-pointer;
+            }
+            .c-tag {
+            @apply flex items-center py-2 px-3 rounded-lg hover:bg-neutral-100 cursor-pointer;
+            }
+            .c-label {
+            @apply ml-2 text-neutral-500 text-sm cursor-pointer;
+            }
+            .s-cards {
+            @apply bg-white rounded-xl shadow-card overflow-hidden card-hover border border-neutral-200 cursor-pointer;
+            }
+            .cards-span {
+            @apply px-2 py-0.5 rounded-full text-xs font-medium text-white;
+            }
+            .cards-tits {
+            @apply font-semibold text-neutral-600 mb-1 line-clamp-1;
+            }
+            .cards-description {
+            @apply text-sm text-neutral-500 mb-3 line-clamp-2;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral-100 min-h-screen flex flex-col">
+    <header>
+        <nav id="header-nav">
+            <ul id="header-ul">
+                <li><a href="../index.html" class="header-li">首页</a></li>
+                <li><a href="" class="header-li">专题研究</a></li>
+                <li><a href="" class="header-li">搜索页</a></li>
+            </ul>
+        </nav>
+        <p class="w-3/10 text-white content-center">中国历史遗存档案</p>
+        <div id="langSwitch">
+            <p class="langSwitchText">中</p>
+            <p class="langSwitchText">|</p>
+            <p class="langSwitchText">ENG</p>
+        </div>
+    </header>
+
+    <div class="flex-1 container mx-auto mt-4 px-4 py-4 flex flex-col items-center bg-primary rounded-xl">
+        <div class="relative flex-1 w-5/6 pt-4">
+            <input type="text" id="search-input" 
+                class="w-full pl-10 pr-4 py-2 rounded-lg border border-neutral-200 search-focus outline-none transition-all"
+                placeholder="搜索资料库...">
+            <i class="fa-solid fa-search absolute left-3 top-1/2 text-neutral-400"></i>
+        </div>
+        <img class="size-3/5" src="../pics/s-timeline.png" alt="时间线">
+    </div>
+
+    <div class="flex-1 container mx-auto mt-4 bg-white flex flex-row justify-between rounded-xl shadow-card">
+        <div class="flex flex-col justify-start p-4 w-1/5">
+            <h3 class="text-lg font-medium mb-3">时间跨度</h3>
+            <div class="flex items-center w-full">
+              <input type="number" placeholder="开始" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-transparent">
+              <span class="mx-2 text-gray-600">到</span>
+              <input type="number" placeholder="结束" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-transparent">
+            </div>
+        </div>
+
+        <!-- 省份表格 -->
+         <div class="province-grid">
+                <div class="province-item">河北</div>
+                <div class="province-item">山西</div>
+                <div class="province-item">陕西</div>
+                <div class="province-item">甘肃</div>
+                <div class="province-item">青海</div>
+                <div class="province-item">安徽</div>
+                <div class="province-item">江苏</div>
+                <div class="province-item">浙江</div>
+                <div class="province-item">江西</div>
+                <div class="province-item">湖南</div>
+                <div class="province-item">湖北</div>
+                <div class="province-item">四川</div>
+                <div class="province-item">陕西</div>
+                <div class="province-item">广东</div>
+                <div class="province-item">辽宁</div>
+                <div class="province-item">吉林</div>
+                <div class="province-item">黑龙江</div>
+                <div class="province-item">安徽</div>
+                <div class="province-item">台湾</div>
+                <div class="province-item">福建</div>
+                <div class="province-item">山东</div>
+                <div class="province-item">河南</div>
+                <div class="province-item">贵州</div>
+                <div class="province-item">云南</div>
+                <div class="province-item">青海</div>
+                <div class="province-item">北京</div>
+                <div class="province-item">天津</div>  
+                <div class="province-item">上海</div>
+                <div class="province-item">重庆</div>
+                <div class="province-item">香港</div>
+                <div class="province-item">澳门</div>
+                <div class="province-item">内蒙古</div>
+                <div class="province-item">广西</div>
+                <div class="province-item">西藏</div>
+                <div class="province-item">宁夏</div>
+                <div class="province-item">新疆</div>
+            </div>
+    </div>
+
+    <main class="flex-1 container mx-auto mb-4 px-0 py-6 flex flex-col lg:flex-row gap-6">
+        <!-- 左侧标签栏 -->
+        <aside class="w-full lg:w-80 shrink-0 bg-white rounded-xl shadow-card p-5 h-[calc(150vh-5rem)] overflow-hidden flex flex-col">
+            <h2 class="text-lg font-semibold text-neutral-600 mb-4 flex items-center">
+            <i class="fa-solid fa-tags text-primary mr-2"></i>
+            分类
+            </h2>
+            
+            <!-- 标签搜索 -->
+            <div class="relative mb-4">
+            <input type="text" id="tag-search" 
+                    class="w-full pl-8 pr-4 py-2 rounded-lg border border-neutral-200 focus:border-primary focus:ring-2 focus:ring-primary/20 search-focus outline-none text-sm"
+                    placeholder="搜索标签...">
+            <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400 text-sm"></i>
+            </div>
+            
+            <!-- 标签列表 -->
+            <div class="overflow-y-auto flex-1">
+            <ul class="space-y-1">
+
+                <li class="mb-1">
+                    <div class="tag-item parent-tag p-tag">
+                        <div class="flex items-center">
+                        <input type="checkbox" id="sysx" class="tag-checkbox a-input parent-checkbox">
+                        <label for="sysx" class="p-label">山岳水系</label>
+                        </div>
+                        <button class="toggle-children p-1 rounded-full hover:bg-neutral-200 transition-colors">
+                        <i class="fa-solid fa-chevron-down text-neutral-400 rotate-icon"></i>
+                        </button>
+                    </div>
+                    <ul class="children-tags ml-6 mt-1 space-y-1 hidden">
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="ms" class="tag-checkbox a-input child-checkbox" data-parent="sysx">
+                            <label for="ms" class="c-label">名山</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="hh" class="tag-checkbox a-input child-checkbox" data-parent="sysx">
+                            <label for="hh" class="c-label">河湖</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="sysx-qt" class="tag-checkbox a-input child-checkbox" data-parent="sysx">
+                            <label for="sysx-qt" class="c-label">其他</label>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="mb-1">
+                    <div class="tag-item parent-tag p-tag">
+                        <div class="flex items-center">
+                        <input type="checkbox" id="rjjl" class="tag-checkbox a-input parent-checkbox">
+                        <label for="rjjl" class="p-label">人居聚落</label>
+                        </div>
+                        <button class="toggle-children p-1 rounded-full hover:bg-neutral-200 transition-colors">
+                        <i class="fa-solid fa-chevron-down text-neutral-400 rotate-icon"></i>
+                        </button>
+                    </div>
+                    <ul class="children-tags ml-6 mt-1 space-y-1 hidden">
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="lscs" class="tag-checkbox a-input child-checkbox" data-parent="rjjl">
+                            <label for="lscs" class="c-label">历史城市</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="whjq" class="tag-checkbox a-input child-checkbox" data-parent="rjjl">
+                            <label for="whjq" class="c-label">文化街区</label>
+                        </div>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="ctcl" class="tag-checkbox a-input child-checkbox" data-parent="rjjl">
+                            <label for="ctcl" class="c-label">传统村落</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="bsbsd" class="tag-checkbox a-input child-checkbox" data-parent="rjjl">
+                            <label for="bsbsd" class="c-label">别墅避暑地</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="rjjl-qt" class="tag-checkbox a-input child-checkbox" data-parent="rjjl">
+                            <label for="rjjl-qt" class="c-label">其他</label>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="mb-1">
+                    <div class="tag-item parent-tag p-tag">
+                        <div class="flex items-center">
+                        <input type="checkbox" id="" class="tag-checkbox a-input parent-checkbox">
+                        <label for="" class="p-label">宗教设施</label>
+                        </div>
+                        <button class="toggle-children p-1 rounded-full hover:bg-neutral-200 transition-colors">
+                        <i class="fa-solid fa-chevron-down text-neutral-400 rotate-icon"></i>
+                        </button>
+                    </div>
+                    <ul class="children-tags ml-6 mt-1 space-y-1 hidden">
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">佛家</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">道家</label>
+                        </div>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">宗祠</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">地方信仰</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">其他</label>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="mb-1">
+                    <div class="tag-item parent-tag p-tag">
+                        <div class="flex items-center">
+                        <input type="checkbox" id="rxjg" class="tag-checkbox a-input parent-checkbox">
+                        <label for="rxjg" class="p-label">儒学机构</label>
+                        </div>
+                        <button class="toggle-children p-1 rounded-full hover:bg-neutral-200 transition-colors">
+                        <i class="fa-solid fa-chevron-down text-neutral-400 rotate-icon"></i>
+                        </button>
+                    </div>
+                    <ul class="children-tags ml-6 mt-1 space-y-1 hidden">
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="sy" class="tag-checkbox a-input child-checkbox" data-parent="rxjg">
+                            <label for="sy" class="c-label">书院</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">贡院</label>
+                        </div>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">国子监&御书省</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">文庙</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">其他</label>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="mb-1">
+                    <div class="tag-item parent-tag p-tag">
+                        <div class="flex items-center">
+                        <input type="checkbox" id="" class="tag-checkbox a-input parent-checkbox">
+                        <label for="" class="p-label">园林池馆</label>
+                        </div>
+                        <button class="toggle-children p-1 rounded-full hover:bg-neutral-200 transition-colors">
+                        <i class="fa-solid fa-chevron-down text-neutral-400 rotate-icon"></i>
+                        </button>
+                    </div>
+                    <ul class="children-tags ml-6 mt-1 space-y-1 hidden">
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">私家园林</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">御署园林</label>
+                        </div>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">皇家园林</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">其他</label>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="mb-1">
+                    <div class="tag-item parent-tag p-tag">
+                        <div class="flex items-center">
+                        <input type="checkbox" id="" class="tag-checkbox a-input parent-checkbox">
+                        <label for="" class="p-label">交通水利</label>
+                        </div>
+                        <button class="toggle-children p-1 rounded-full hover:bg-neutral-200 transition-colors">
+                        <i class="fa-solid fa-chevron-down text-neutral-400 rotate-icon"></i>
+                        </button>
+                    </div>
+                    <ul class="children-tags ml-6 mt-1 space-y-1 hidden">
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">路桥</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">漕运</label>
+                        </div>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">水利</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">其他</label>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="mb-1">
+                    <div class="tag-item parent-tag p-tag">
+                        <div class="flex items-center">
+                        <input type="checkbox" id="" class="tag-checkbox a-input parent-checkbox">
+                        <label for="" class="p-label">产业遗址</label>
+                        </div>
+                        <button class="toggle-children p-1 rounded-full hover:bg-neutral-200 transition-colors">
+                        <i class="fa-solid fa-chevron-down text-neutral-400 rotate-icon"></i>
+                        </button>
+                    </div>
+                    <ul class="children-tags ml-6 mt-1 space-y-1 hidden">
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">农业</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">工业</label>
+                        </div>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">矿业</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">其他</label>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="mb-1">
+                    <div class="tag-item parent-tag p-tag">
+                        <div class="flex items-center">
+                        <input type="checkbox" id="" class="tag-checkbox a-input parent-checkbox">
+                        <label for="" class="p-label">考古发掘</label>
+                        </div>
+                        <button class="toggle-children p-1 rounded-full hover:bg-neutral-200 transition-colors">
+                        <i class="fa-solid fa-chevron-down text-neutral-400 rotate-icon"></i>
+                        </button>
+                    </div>
+                    <ul class="children-tags ml-6 mt-1 space-y-1 hidden">
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">田野考古</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">水下考古</label>
+                        </div>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">园林&景观考古</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">其他</label>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="mb-1">
+                    <div class="tag-item parent-tag p-tag">
+                        <div class="flex items-center">
+                        <input type="checkbox" id="" class="tag-checkbox a-input parent-checkbox">
+                        <label for="" class="p-label">二十世纪（-1979止）</label>
+                        </div>
+                        <button class="toggle-children p-1 rounded-full hover:bg-neutral-200 transition-colors">
+                        <i class="fa-solid fa-chevron-down text-neutral-400 rotate-icon"></i>
+                        </button>
+                    </div>
+                    <ul class="children-tags ml-6 mt-1 space-y-1 hidden">
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">城市规划</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">建筑</label>
+                        </div>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">公园</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">生活空间</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">其他</label>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="mb-1">
+                    <div class="tag-item parent-tag p-tag">
+                        <div class="flex items-center">
+                        <input type="checkbox" id="" class="tag-checkbox a-input parent-checkbox">
+                        <label for="" class="p-label">保护级别</label>
+                        </div>
+                        <button class="toggle-children p-1 rounded-full hover:bg-neutral-200 transition-colors">
+                        <i class="fa-solid fa-chevron-down text-neutral-400 rotate-icon"></i>
+                        </button>
+                    </div>
+                    <ul class="children-tags ml-6 mt-1 space-y-1 hidden">
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">世界文化遗产</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">中国文化遗产</label>
+                        </div>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">省级文化遗产</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">市级文化遗产</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">其他</label>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="mb-1">
+                    <div class="tag-item parent-tag p-tag">
+                        <div class="flex items-center">
+                        <input type="checkbox" id="" class="tag-checkbox a-input parent-checkbox">
+                        <label for="" class="p-label">资料类型</label>
+                        </div>
+                        <button class="toggle-children p-1 rounded-full hover:bg-neutral-200 transition-colors">
+                        <i class="fa-solid fa-chevron-down text-neutral-400 rotate-icon"></i>
+                        </button>
+                    </div>
+                    <ul class="children-tags ml-6 mt-1 space-y-1 hidden">
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">遗址</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">文化景观</label>
+                        </div>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">文献</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">碑刻字画</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">舆图</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">规划图</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">设计图</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">测绘图</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">模型</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">照片</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">视频</label>
+                        </div>
+                        </li>
+                        </li>
+                        <div class="tag-item child-tag c-tag">
+                            <input type="checkbox" id="" class="tag-checkbox a-input child-checkbox" data-parent="">
+                            <label for="" class="c-label">其他</label>
+                        </div>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            </div>
+            
+            <!-- 活跃标签 -->
+            <div class="mt-4 pt-4 border-t border-neutral-200">
+            <h3 class="text-sm font-medium text-neutral-500 mb-2">活跃标签</h3>
+            <div class="flex flex-wrap gap-2" id="active-tags"></div>
+            </div>
+        </aside>
+
+        <!-- 右侧内容区 -->
+        <section class="flex-1 bg-white rounded-xl shadow-card p-5 h-[calc(150vh-5rem)] overflow-hidden flex flex-col">
+            <div class="flex flex-wrap items-center justify-between mb-4">
+
+                <div class="flex items-center flex-start w-full max-w-md space-x-2">
+                    <!-- 上一页按钮 -->
+                    <button id="prevPage" class="flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 text-neutral-600 hover:bg-primary hover:text-white hover:border-primary page-transition focus:outline-none focus:ring-2 focus:ring-primary/50">
+                        <i class="fa fa-chevron-left"></i>
+                    </button>
+                    
+                    <!-- 页码信息 -->
+                    <div class="flex items-center space-x-2">
+                        <input type="number" id="currentPage" min="1" max="10" value="1" 
+                                class="w-12 h-10 rounded-lg border border-neutral-200 text-center font-medium text-neutral-600 input-focus page-transition">
+                        <span class="text-neutral-500">/</span>
+                        <span id="totalPages" class="font-medium text-neutral-600">10</span>
+                    </div>
+                    
+                    <!-- 下一页按钮 -->
+                    <button id="nextPage" class="flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 text-neutral-600 hover:bg-primary hover:text-white hover:border-primary page-transition focus:outline-none focus:ring-2 focus:ring-primary/50">
+                        <i class="fa fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="flex items-center space-x-2 mt-2 sm:mt-0">
+                    <div class="relative">
+                    <select class="pl-3 pr-8 py-1.5 rounded-lg border border-neutral-200 text-sm text-neutral-500 appearance-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                        <option>最新更新</option>
+                        <option>最多查看</option>
+                        <option>相关度</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-400 text-xs pointer-events-none"></i>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- 内容网格 -->
+            <div class="p-4 overflow-y-auto scrollbar-hide flex-1">
+                <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="content-grid">
+                    <!-- 内容卡片 1 - 山岳水系+名山 -->
+                    <div class="s-cards content-card" data-tags="sysx,ms">
+                        <div class="h-36 bg-primary/10 relative overflow-hidden">
+                            <img src="https://picsum.photos/400/200?random=1" alt="图片描述" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                            <span class="cards-span bg-primary/80">山岳水系</span>
+                            <span class="cards-span bg-secondary/80">名山</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="cards-tits">标题1</h3>
+                            <p class="cards-description">卡片描述1</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 内容卡片 2 - 山岳水系+河湖 -->
+                    <div class="s-cards content-card" data-tags="sysx,hh">
+                        <div class="h-36 bg-primary/10 relative overflow-hidden">
+                            <img src="https://picsum.photos/400/200?random=2" alt="图片描述" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                            <span class="cards-span bg-primary/80">山岳水系</span>
+                            <span class="cards-span bg-secondary/80">河湖</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="cards-tits">标题2</h3>
+                            <p class="cards-description">卡片描述2</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 内容卡片 3 - 山岳水系+其他 -->
+                    <div class="s-cards content-card" data-tags="sysx,sysx-qt">
+                        <div class="h-36 bg-primary/10 relative overflow-hidden">
+                            <img src="https://picsum.photos/400/200?random=3" alt="图片描述" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                            <span class="cards-span bg-primary/80">山岳水系</span>
+                            <span class="cards-span bg-secondary/80">其他</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="cards-tits">标题3</h3>
+                            <p class="cards-description">卡片描述3</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 内容卡片 4 - 人居聚落+历史城市 -->
+                    <div class="s-cards content-card" data-tags="rjjl,lscs">
+                        <div class="h-36 bg-primary/10 relative overflow-hidden">
+                            <img src="https://picsum.photos/400/200?random=4" alt="图片描述" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                            <span class="cards-span bg-primary/80">人居聚落</span>
+                            <span class="cards-span bg-three/80">历史城市</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="cards-tits">标题4</h3>
+                            <p class="cards-description">卡片描述4</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 内容卡片 5 - 人居聚落+文化街区 -->
+                    <div class="s-cards content-card" data-tags="rjjl,whjq">
+                        <div class="h-36 bg-primary/10 relative overflow-hidden">
+                            <img src="https://picsum.photos/400/200?random=5" alt="图片描述" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                            <span class="cards-span bg-primary/80">人居聚落</span>
+                            <span class="cards-span bg-three/80">文化街区</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="cards-tits">标题5</h3>
+                            <p class="cards-description">卡片描述5</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 内容卡片 6 - 人居聚落+传统村落 -->
+                    <div class="s-cards content-card" data-tags="rjjl,ctcl">
+                        <div class="h-36 bg-primary/10 relative overflow-hidden">
+                            <img src="https://picsum.photos/400/200?random=6" alt="图片描述" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                            <span class="cards-span bg-primary/80">人居聚落</span>
+                            <span class="cards-span bg-three/80">传统村落</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="cards-tits">标题6</h3>
+                            <p class="cards-description">卡片描述6</p>
+                        </div>
+                    </div>
+
+                    <!-- 内容卡片 7 - 人居聚落+别墅避暑地 -->
+                    <div class="s-cards content-card" data-tags="rjjl,bsbsd">
+                        <div class="h-36 bg-primary/10 relative overflow-hidden">
+                            <img src="https://picsum.photos/400/200?random=7" alt="图片描述" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                            <span class="cards-span bg-primary/80">人居聚落</span>
+                            <span class="cards-span bg-three/80">别墅避暑地</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="cards-tits">标题7</h3>
+                            <p class="cards-description">卡片描述7</p>
+                        </div>
+                    </div>
+
+                    <!-- 内容卡片 8 - 人居聚落+其他 -->
+                    <div class="s-cards content-card" data-tags="rjjl,rjjl-qt">
+                        <div class="h-36 bg-primary/10 relative overflow-hidden">
+                            <img src="https://picsum.photos/400/200?random=8" alt="图片描述" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                            <span class="cards-span bg-primary/80">人居聚落</span>
+                            <span class="cards-span bg-three/80">其他</span>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="cards-tits">标题8</h3>
+                            <p class="cards-description">卡片描述8</p>
+                        </div>
+                    </div>
+
+                    <!-- 内容卡片 9 - 儒学机构+书院 -->
+                    <div class="s-cards content-card" data-tags="rxjg,sy">
+                        <div class="h-36 bg-primary/10 relative overflow-hidden">
+                            <img src="../pics/s-BLDSY.jpg" alt="图片描述" class="h-full object-cover" onclick="location.href='s-data.html'">
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                            <span class="cards-span bg-primary/80">儒学机构</span>
+                            <span class="cards-span bg-label4/80">书院</span>
+                            </div>
+                        </div>
+                        <div class="p-4" onclick="location.href='s-data.html'">
+                            <h3 class="cards-tits">白鹿洞书院</h3>
+                            <p class="cards-description">白鹿洞书院，始建于南唐升元年间（940年），位于庐山五老峰南麓，有“海内第一书院”之誉；
+                                南唐立之为“庐山国学”、又称“白鹿国庠”。书院“始于唐、盛于宋，沿于明清”，鼎盛于南宋时朱熹的重建。
+                                建筑群沿贯道溪自西向东串联式而筑，分为五组院落。
+                            </p>
+                        </div>
+                    </div>
+            </div>
+            
+
+            </div>
+        </section>
+    </main>
+    <footer>
+        <nav id="footer-nav">
+            <ul id="footer-ul-1">
+                <li><a href="" class="footer-li">关于我们</a></li>
+                <li><a href="" class="footer-li">参加人员</a></li>
+                <li><a href="" class="footer-li">政策条款</a></li>
+                <li><a href="" class="footer-li">常见问题</a></li>
+                <li><a href="" class="footer-li">联系我们</a></li>
+                <li><a href="" class="footer-li">推荐链接</a></li>
+            </ul>
+            <ul id="footer-ul-2">
+                <li><a href="" class="footer-li">About us</a></li>
+                <li><a href="" class="footer-li">Participants</a></li>
+                <li><a href="" class="footer-li">Terms & Policies</a></li>
+                <li><a href="" class="footer-li">FAQ</a></li>
+                <li><a href="" class="footer-li">Contact us</a></li>
+                <li><a href="" class="footer-li">Recommended links</a></li>
+            </ul>
+        </nav>
+        <div id="footer-links">
+            <p id="footer-p">二维码/其他链接/LOGO&nbsp;(暂未添加)</p>
+        </div>
+    </footer>
+    <script src="../scripts/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专题总汇页</title>
+    <link href="../styles/style.css" type="text/css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: '#751021'
+              }
+            },
+          }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .page-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .input-focus {
+            @apply focus:ring-2 focus:ring-primary/50 focus:border-primary focus:outline-none;
+            }
+            .ts-items{
+                @apply w-[calc(100vw/6)] aspect-square border border-2 border-black/80 rounded-xl;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav id="header-nav">
+            <ul id="header-ul">
+                <li><a href="../index.html" class="header-li">首页</a></li>
+                <li><a href="" class="header-li">专题研究</a></li>
+                <li><a href="search.html" class="header-li">搜索页</a></li>
+            </ul>
+        </nav>
+        <p class="w-3/10 text-white content-center">中国历史遗存档案</p>
+        <div id="langSwitch">
+            <p class="langSwitchText">中</p>
+            <p class="langSwitchText">|</p>
+            <p class="langSwitchText">ENG</p>
+        </div>
+    </header>
+
+    <main class="px-20 py-10 gap-10 bg-black/30">
+        <h1 class="text-5xl text-primary">专题研究 THEMATIC RESEARCH</h1>
+        
+        <div class="relative w-5/6">
+            <input type="text" id="search-input" 
+                class="w-full pl-10 pr-4 py-2 rounded-lg border border-2 border-black/50 search-focus outline-none"
+                placeholder="搜索资料库...">
+            <i class="fa-solid fa-search absolute left-3 top-3 text-black/50"></i>
+        </div>
+        
+        <div class="grid grid-cols-4 gap-6">
+            <div class="ts-items"></div>
+            <div class="ts-items"></div>
+            <div class="ts-items"></div>
+            <div class="ts-items"></div>
+            <div class="ts-items"></div>
+            <div class="ts-items"></div>
+            <div class="ts-items"></div>
+            <div class="ts-items"></div>
+            <div class="ts-items"></div>
+            <div class="ts-items"></div>
+            <div class="ts-items"></div>
+            <div class="ts-items"></div>
+        </div>
+
+        <div class="flex justify-center w-full space-x-2">
+            <!-- 上一页按钮 -->
+            <button id="prevPage" class="flex items-center justify-center w-10 h-10 rounded-full border border-2 border-black/50 text-black/80 hover:bg-primary hover:text-white hover:border-primary page-transition focus:outline-none focus:ring-2 focus:ring-primary/50">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            
+            <!-- 页码信息 -->
+            <div class="flex items-center space-x-2">
+                <input type="number" id="currentPage" min="1" max="10" value="1" 
+                        class="w-12 h-10 rounded-lg border border-2 border-black/50 text-center font-medium text-black/80 input-focus page-transition">
+                <span class="text-neutral-500">/</span>
+                <span id="totalPages" class="font-medium text-black/80">10</span>
+            </div>
+            
+            <!-- 下一页按钮 -->
+            <button id="nextPage" class="flex items-center justify-center w-10 h-10 rounded-full border border-2 border-black/50 text-black/80 hover:bg-primary hover:text-white hover:border-primary page-transition focus:outline-none focus:ring-2 focus:ring-primary/50">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
+    </main>
+
+    <footer>
+        <nav id="footer-nav">
+            <ul id="footer-ul-1">
+                <li><a href="" class="footer-li">关于我们</a></li>
+                <li><a href="" class="footer-li">参加人员</a></li>
+                <li><a href="" class="footer-li">政策条款</a></li>
+                <li><a href="" class="footer-li">常见问题</a></li>
+                <li><a href="" class="footer-li">联系我们</a></li>
+                <li><a href="" class="footer-li">推荐链接</a></li>
+            </ul>
+            <ul id="footer-ul-2">
+                <li><a href="" class="footer-li">About us</a></li>
+                <li><a href="" class="footer-li">Participants</a></li>
+                <li><a href="" class="footer-li">Terms & Policies</a></li>
+                <li><a href="" class="footer-li">FAQ</a></li>
+                <li><a href="" class="footer-li">Contact us</a></li>
+                <li><a href="" class="footer-li">Recommended links</a></li>
+            </ul>
+        </nav>
+        <div id="footer-links">
+            <p id="footer-p">二维码/其他链接/LOGO&nbsp;(暂未添加)</p>
+        </div>
+    </footer>  
+</body>
+
+</html>

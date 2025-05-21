@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片页</title>
+    <link href="../styles/style.css" type="text/css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: '#751021'
+              }
+            },
+          }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .p-items{
+                @apply w-[calc(100vw/9)] aspect-square border border-2 border-black/80 rounded-xl object-cover;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav id="header-nav">
+            <ul id="header-ul">
+                <li><a href="../index.html" class="header-li">首页</a></li>
+                <li><a href="" class="header-li">专题研究</a></li>
+                <li><a href="search.html" class="header-li">搜索页</a></li>
+            </ul>
+        </nav>
+        <p class="w-3/10 text-white content-center">中国历史遗存档案</p>
+        <div id="langSwitch">
+            <p class="langSwitchText">中</p>
+            <p class="langSwitchText">|</p>
+            <p class="langSwitchText">ENG</p>
+        </div>
+    </header>
+
+    <main class="items-start p-10 bg-black/30">
+        <div class="flex flex-col gap-4">
+            <p class="cursor-pointer" onclick="location.href='s-data.html'"><  返回</p>
+            <p>主题 > 儒家建筑 > 书院</p>
+            <h1 class="text-5xl">白鹿洞书院</h1>
+            <h1 class="text-5xl">White-Deer Grotto Academy</h1>
+        </div>
+    </main>
+
+    <main class="px-20 py-10 bg-white">
+        <div class="flex flex-col items-center w-full gap-6">
+            <div class="flex flex-row justify-between w-4/5">
+                <h2 class="text-2xl">总览</h2>
+                <h2 class="text-2xl text-primary/80">更多</h2>
+            </div>
+            <div class="flex flex-row justify-start pl-20 gap-6 w-full">
+                <div class="p-items"></div>
+                <div class="p-items"></div>
+                <div class="p-items"></div>
+                <div class="p-items"></div>
+                <div class="p-items"></div>
+                <div class="p-items"></div>
+            </div>
+
+        <div class="flex flex-col items-center w-full gap-6">
+            <div class="flex flex-row justify-between w-4/5">
+                <h2 class="text-2xl">先贤书院</h2>
+                <h2 class="text-2xl text-primary/80">更多</h2>
+            </div>
+            <div class="flex flex-row justify-start pl-20 gap-6 w-full">
+                <img src="../pics/先贤书院/丹桂亭.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/先贤书院/丹桂亭-2.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/先贤书院/入口.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/先贤书院/朱子祠.jpeg" alt="图片描述" class="p-items">
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center w-full gap-6">
+            <div class="flex flex-row justify-between w-4/5">
+                <h2 class="text-2xl">棂星门院</h2>
+                <h2 class="text-2xl text-primary/80">更多</h2>
+            </div>
+            <div class="flex flex-row justify-start pl-20 gap-6 w-full">
+                <img src="../pics/棂星门院/1663828568e01341.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/棂星门院/泮池.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/棂星门院/牌坊-1.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/棂星门院/牌坊-2.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/棂星门院/礼圣殿.jpeg" alt="图片描述" class="p-items">
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center w-full gap-6">
+            <div class="flex flex-row justify-between w-4/5">
+                <h2 class="text-2xl">白鹿洞书院</h2>
+                <h2 class="text-2xl text-primary/80">更多</h2>
+            </div>
+            <div class="flex flex-row justify-start pl-20 gap-6 w-full">
+                <img src="../pics/白鹿书院/1663828562a8927f.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/白鹿书院/入口-1.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/白鹿书院/入口-2.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/白鹿书院/入口-3.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/白鹿书院/庭院.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/白鹿书院/鹿洞.jpg" alt="图片描述" class="p-items">
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center w-full gap-6">
+            <div class="flex flex-row justify-between w-4/5">
+                <h2 class="text-2xl">紫阳书院</h2>
+                <h2 class="text-2xl text-primary/80">更多</h2>
+            </div>
+            <div class="flex flex-row justify-start pl-20 gap-6 w-full">
+                <img src="../pics/紫阳书院/入口-2.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/紫阳书院/入口.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/紫阳书院/文会堂.jpg" alt="图片描述" class="p-items">
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center w-full gap-6">
+            <div class="flex flex-row justify-between w-4/5">
+                <h2 class="text-2xl">延宾馆</h2>
+                <h2 class="text-2xl text-primary/80">更多</h2>
+            </div>
+            <div class="flex flex-row justify-start pl-20 gap-6 w-full">
+                <img src="../pics/延宾馆/入口.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/延宾馆/文会堂.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/延宾馆/林业学校.jpeg" alt="图片描述" class="p-items">
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center w-full gap-6">
+            <div class="flex flex-row justify-between w-4/5">
+                <h2 class="text-2xl">贯道溪</h2>
+                <h2 class="text-2xl text-primary/80">更多</h2>
+            </div>
+            <div class="flex flex-row justify-start pl-20 gap-6 w-full">
+                <img src="../pics/贯道溪/枕流-1.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/贯道溪/枕流-2.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/贯道溪/枕流.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/贯道溪/枕流桥-2.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/贯道溪/枕流桥.jpg" alt="图片描述" class="p-items">
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center w-full gap-6">
+            <div class="flex flex-row justify-between w-4/5">
+                <h2 class="text-2xl">碑刻</h2>
+                <h2 class="text-2xl text-primary/80">更多</h2>
+            </div>
+            <div class="flex flex-row justify-start pl-20 gap-6 w-full">
+                <img src="../pics/碑刻/1479327548029.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/碑刻/碑廊.jpeg" alt="图片描述" class="p-items">
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center w-full gap-6">
+            <div class="flex flex-row justify-between w-4/5">
+                <h2 class="text-2xl">版刻</h2>
+                <h2 class="text-2xl text-primary/80">更多</h2>
+            </div>
+            <div class="flex flex-row justify-start pl-20 gap-6 w-full">
+                <img src="../pics/版刻/1554 BLD - mountain & water.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/版刻/1554《白鹿洞山水圖》明代郑挺鹄撰《白鹿洞志》嘉靖四十五年刻本.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/版刻/1720 Bailu Dong Academy (Lushan)-1.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/版刻/1720 Bailu Dong Academy (Lushan).jpg" alt="图片描述" class="p-items">
+                <img src="../pics/版刻/1836 道光十六年张维屏《鹿洞讲书》图.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/版刻/1871 BLD - overview.jpg" alt="图片描述" class="p-items">
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center w-full gap-6">
+            <div class="flex flex-row justify-between w-4/5">
+                <h2 class="text-2xl">老照片</h2>
+                <h2 class="text-2xl text-primary/80">更多</h2>
+            </div>
+            <div class="flex flex-row justify-start pl-20 gap-6 w-full">
+                <img src="../pics/老照片/书院内的孔子像.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/老照片/书院附近的溪流.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/老照片/入口.jpg" alt="图片描述" class="p-items">
+                <img src="../pics/老照片/古树掩映中的白鹿洞书院.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/老照片/朱文公祠.jpeg" alt="图片描述" class="p-items">
+                <img src="../pics/老照片/朱文公祠内的朱熹神位.jpeg" alt="图片描述" class="p-items">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <nav id="footer-nav">
+            <ul id="footer-ul-1">
+                <li><a href="" class="footer-li">关于我们</a></li>
+                <li><a href="" class="footer-li">参加人员</a></li>
+                <li><a href="" class="footer-li">政策条款</a></li>
+                <li><a href="" class="footer-li">常见问题</a></li>
+                <li><a href="" class="footer-li">联系我们</a></li>
+                <li><a href="" class="footer-li">推荐链接</a></li>
+            </ul>
+            <ul id="footer-ul-2">
+                <li><a href="" class="footer-li">About us</a></li>
+                <li><a href="" class="footer-li">Participants</a></li>
+                <li><a href="" class="footer-li">Terms & Policies</a></li>
+                <li><a href="" class="footer-li">FAQ</a></li>
+                <li><a href="" class="footer-li">Contact us</a></li>
+                <li><a href="" class="footer-li">Recommended links</a></li>
+            </ul>
+        </nav>
+        <div id="footer-links">
+            <p id="footer-p">二维码/其他链接/LOGO&nbsp;(暂未添加)</p>
+        </div>
+    </footer>
+</body>
+</html>
