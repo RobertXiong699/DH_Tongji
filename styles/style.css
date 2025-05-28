@@ -83,7 +83,7 @@ main {
 }
 
 #block1 {
-    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),url('../pics/index-block1-back.png') center/cover no-repeat;
+    background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),url('../pics/index-block1-back.png') center/cover no-repeat;
     padding: 10%;
     row-gap: 20px;
 }
@@ -172,7 +172,7 @@ h2 {
 }
 
 #block2 {
-    background-color: #999;
+    /* background-color: #999; */
     padding: 2%;
     row-gap: 20px;
 }
@@ -182,7 +182,7 @@ h2 {
 }
 
 .block2-link {
-    color: white;
+    color: #8B4513;
 }
 
 .block2-link:hover {
@@ -190,7 +190,7 @@ h2 {
 }
 
 #block3 {
-    background-color: #777;
+    /* background-color: #777; */
     padding: 2%;
 }
 
@@ -239,7 +239,7 @@ h2 {
 }
 
 #block4 {
-    background-color: #999;
+    /* background-color: #999; */
     padding: 2%;
 }
 
@@ -374,7 +374,7 @@ h2 {
 }
 
 .tranding-slider-control .slider-arrow {
-    background: white;
+    background: #777;
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
@@ -407,7 +407,7 @@ h2 {
 }
 
 #block5 {
-    background-color: #777;
+    /* background-color: #777; */
     padding: 2%;
 }
 
